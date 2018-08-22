@@ -4,25 +4,29 @@ from ciphers import Cipher
 
 
 class Atbash(Cipher):
-    ALPHABET = string.ascii_uppercase
-    ALPHABET_REVERSED = ALPHABET[::-1]
+    ALPHABET = string.ascii_letters
+
+    @classmethod
+    def __encryptdecrypt(cls, message):
+        output = ""
+        for character in message:
+            if character in cls.ALPHABET:
+                index = cls.ALPHABET.index(character)
+                output += cls.ALPHABET[::-1][index].swapcase()
+            else:
+                output += character
+        return output
 
     """Takes one string and encrypts it
     based on the Atbash cipher.
     """
-    def encrypt(self, message):
-        encrypted = ""
-        for character in message.upper():
-            index = self.ALPHABET.index(character)
-            encrypted += self.ALPHABET_REVERSED[index]
-        return encrypted
+    @classmethod
+    def encrypt(cls, message):
+        return cls.__encryptdecrypt(message)
 
     """Takes one string and decrypts it
     based on the Atbash cipher.
     """
-    def decrypt(self, message):
-        decrypted = ""
-        for character in message.upper():
-            index = self.ALPHABET_REVERSED.index(character)
-            decrypted += self.ALPHABET[index]
-        return decrypted
+    @classmethod
+    def decrypt(cls, message):
+        return cls.__encryptdecrypt(message)
