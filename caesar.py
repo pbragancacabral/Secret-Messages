@@ -8,10 +8,8 @@ class Caesar(Cipher):
 
     def __init__(self, offset=3):
         self.offset = offset
-        self.FORWARD = string.ascii_uppercase +
-        string.ascii_uppercase[:self.offset+1]
-        self.BACKWARD = string.ascii_uppercase[:self.offset+1] +
-        string.ascii_uppercase
+        self.FORWARD = string.ascii_uppercase + string.ascii_uppercase[:self.offset+1]
+        self.BACKWARD = string.ascii_uppercase[:self.offset+1] + string.ascii_uppercase
 
     """Takes one string and encrypts it
     based on the Caesar cipher.

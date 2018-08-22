@@ -1,8 +1,8 @@
 import helpers
 
 from atbash import Atbash
-from ciphers import Cipher
-from keywordd import Keywordd
+from caesar import Caesar
+from keywordd import Keyword
 from polybius import Polybius
 
 ciphers = ["Atbash", "Caesar", "Polybius", "Keyword"]
@@ -13,7 +13,7 @@ def select_cipher():
     print("Please pick one of the following ciphers:")
     print()
     for cipher in ciphers:
-        print("- {}".format(cipher))
+        print(f"- {cipher}")
     print()
 
     while True:
@@ -26,7 +26,8 @@ def select_cipher():
             elif cipher.upper() == "POLYBIUS":
                 cipher = Polybius()
             elif cipher.upper() == "KEYWORD":
-                cipher = Keywordd()
+                keyword = input("Which word would you like to use as a keyword? ")
+                cipher = Keyword(keyword)
             else:
                 raise ValueError("That cipher doesn't exist" +
                                  "or has not yet been implemented.")
@@ -40,27 +41,27 @@ def select_cipher():
 
 def select_encrypt_or_decrypt():
     while True:
-            helpers.clear_screen()
-            try:
-                action = input("Whould you like to encrypt and decrypt? ")
-                if action != "decrypt" and action != "encrypt":
-                    raise ValueError("You must pick between" +
-                                     "encrypt and decrypt")
-            except ValueError as error:
-                print(error)
-            else:
-                break
+        helpers.clear_screen()
+        try:
+            action = input("Whould you like to encrypt and decrypt? ")
+            if action != "decrypt" and action != "encrypt":
+                raise ValueError("You must pick between" +
+                                 "encrypt and decrypt")
+        except ValueError as error:
+            print(error)
+        else:
+            break
     return action
 
 
 def print_message(cipher, action):
     helpers.clear_screen()
-    message = input("Type the message to {}: ".format(action))
+    message = input(f"Type the message to {action}: ")
     helpers.clear_screen()
     if action == "encrypt":
-        input("Encrypted message: {}".format(cipher.encrypt(message)))
+        input(f"Encrypted message: {cipher.encrypt(message)}")
     else:
-        input("Encrypted message: {}".format(cipher.encrypt(message)))
+        input(f"Decrypted message: {cipher.encrypt(message)}")
 
 
 def prompt_for_restart():
