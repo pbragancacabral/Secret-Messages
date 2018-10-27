@@ -1,17 +1,24 @@
+import random
 import string
 
 from ciphers import Cipher
 
 
 class Caesar(Cipher):
-    """It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed
-    number of positions down the alphabet."""
-    FORWARD = string.ascii_uppercase * 3
+    """In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift,
+    is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which
+    each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example,
+    with a left shift of 3, D would be replaced by A, E would become B, and so on. The method is named after Julius
+    Caesar, who used it in his private correspondence.
 
-    def __init__(self, offset=3):
-        self.offset = offset
-        self.FORWARD = string.ascii_uppercase + string.ascii_uppercase[:self.offset+1]
-        self.BACKWARD = string.ascii_uppercase[:self.offset+1] + string.ascii_uppercase
+    Source: Wikipedia
+
+    This implementation is case-insensitive."""
+
+    _ALPHABET = string.ascii_uppercase
+
+    def __init__(self, offset=random.randint(1, 26)):
+        self.CIPHER = self._ALPHABET[offset:] + self._ALPHABET[:offset]
 
     """Takes one string and encrypts it based on the Caesar cipher."""
     def encrypt(self, text):
@@ -19,12 +26,12 @@ class Caesar(Cipher):
         text = text.upper()
         for char in text:
             try:
-                index = self.FORWARD.index(char)
+                index = self._ALPHABET.index(char)
             except ValueError:
                 output.append(char)
             else:
-                output.append(self.FORWARD[index+self.offset])
-        return ''.join(output)
+                output.append(self.CIPHER[index])
+        return "".join(output)
 
     """Takes one string and decrypts it based on the Caesar cipher."""
     def decrypt(self, text):
@@ -32,9 +39,9 @@ class Caesar(Cipher):
         text = text.upper()
         for char in text:
             try:
-                index = self.BACKWARD.index(char)
+                index = self.CIPHER.index(char)
             except ValueError:
                 output.append(char)
             else:
-                output.append(self.BACKWARD[index-self.offset])
-        return ''.join(output)
+                output.append(self._ALPHABET[index])
+        return "".join(output)
