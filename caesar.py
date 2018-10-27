@@ -14,7 +14,6 @@ class Caesar(Cipher):
     Source: Wikipedia
 
     This implementation is case-insensitive."""
-
     _ALPHABET = string.ascii_uppercase
 
     def __init__(self, offset=random.randint(1, 26)):
