@@ -4,6 +4,8 @@ from ciphers import Cipher
 
 
 class Caesar(Cipher):
+    """It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed
+    number of positions down the alphabet."""
     FORWARD = string.ascii_uppercase * 3
 
     def __init__(self, offset=3):
@@ -11,9 +13,7 @@ class Caesar(Cipher):
         self.FORWARD = string.ascii_uppercase + string.ascii_uppercase[:self.offset+1]
         self.BACKWARD = string.ascii_uppercase[:self.offset+1] + string.ascii_uppercase
 
-    """Takes one string and encrypts it
-    based on the Caesar cipher.
-    """
+    """Takes one string and encrypts it based on the Caesar cipher."""
     def encrypt(self, text):
         output = []
         text = text.upper()
@@ -26,9 +26,7 @@ class Caesar(Cipher):
                 output.append(self.FORWARD[index+self.offset])
         return ''.join(output)
 
-    """Takes one string and decrypts it
-    based on the Caesar cipher.
-    """
+    """Takes one string and decrypts it based on the Caesar cipher."""
     def decrypt(self, text):
         output = []
         text = text.upper()

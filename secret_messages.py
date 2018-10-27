@@ -29,7 +29,7 @@ def select_cipher():
                 keyword = input("Which word would you like to use as a keyword? ")
                 cipher = Keyword(keyword)
             else:
-                raise ValueError("That cipher doesn't exist" +
+                raise ValueError("That cipher doesn't exist " +
                                  "or has not yet been implemented.")
         except ValueError as error:
             print(error)
