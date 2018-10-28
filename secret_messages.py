@@ -61,7 +61,7 @@ def print_message(cipher, action):
     if action == "encrypt":
         input(f"Encrypted message: {cipher.encrypt(message)}")
     else:
-        input(f"Decrypted message: {cipher.encrypt(message)}")
+        input(f"Decrypted message: {cipher.decrypt(message)}")
 
 
 def prompt_for_restart():
